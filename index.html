@@ -1,27 +1,1076 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Prepositions + Transport</title>
-<style>
-body{font-family:system-ui;max-width:560px;margin:40px auto;padding:0 16px;line-height:1.5;background:#f0f7f4;color:#1a2e24}
-.card{background:#fff;border-radius:12px;padding:20px;border:1px solid #c5d9ce}
-a.btn{display:inline-block;background:#1b5e20;color:#fff;padding:12px 18px;border-radius:8px;text-decoration:none;font-weight:600;margin-top:10px}
-code{background:#e8f0eb;padding:2px 6px;border-radius:4px;font-size:.9em}
-</style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="Предлоги">
+  <meta name="format-detection" content="telephone=no">
+  <meta name="theme-color" content="#1F4E79">
+  <title>Предлоги с транспортом · Interactive</title>
+  <style>
+    :root {
+      --primary: #1F4E79;
+      --secondary: #2E75B6;
+      --accent: #5B9BD5;
+      --success: #2e7d32;
+      --error: #c62828;
+      --bg: #f5f7fa;
+      --card: #ffffff;
+      --text: #222;
+      --muted: #666;
+      --border: #e0e4ea;
+      --header-bg: linear-gradient(135deg, #1F4E79, #2E75B6);
+      --by: #e3f2fd;
+      --on: #e8f5e9;
+      --in: #fff3e0;
+    }
+    [data-theme="dark"] {
+      --primary: #5B9BD5;
+      --secondary: #7eb8e0;
+      --accent: #90caf9;
+      --success: #66bb6a;
+      --error: #ef5350;
+      --bg: #121820;
+      --card: #1c2530;
+      --text: #e8eaed;
+      --muted: #9aa0a6;
+      --border: #2d3744;
+      --header-bg: linear-gradient(135deg, #0d1b2a, #1b2838);
+      --by: #1a2a3a;
+      --on: #1a2e22;
+      --in: #2e2418;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    button {
+      font-family: inherit;
+      color: inherit;
+      -webkit-appearance: none;
+      appearance: none;
+      cursor: pointer;
+      touch-action: manipulation;
+      -webkit-tap-highlight-color: rgba(31,78,121,0.15);
+    }
+    body {
+      font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.5;
+      padding: 0 0 60px;
+      transition: background 0.2s, color 0.2s;
+    }
+    header {
+      background: var(--header-bg);
+      color: white;
+      padding: 18px 16px 14px;
+      text-align: center;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.2);
+    }
+    header h1 { font-size: 1.3rem; font-weight: 700; }
+    header p { opacity: 0.9; font-size: 0.85rem; margin-top: 2px; }
+    .header-tools {
+      display: flex;
+      justify-content: center;
+      gap: 8px;
+      margin-top: 10px;
+      flex-wrap: wrap;
+    }
+    .tool-btn {
+      padding: 6px 12px;
+      border-radius: 20px;
+      border: 1px solid rgba(255,255,255,0.4);
+      background: rgba(255,255,255,0.12);
+      color: white;
+      font-size: 0.8rem;
+      cursor: pointer;
+      font-weight: 600;
+    }
+    .tool-btn:hover, .tool-btn.on { background: rgba(255,255,255,0.28); }
+    .container { max-width: 820px; margin: 0 auto; padding: 16px 14px; }
+    .tabs {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-bottom: 16px;
+      background: var(--bg);
+      padding: 10px 0;
+      position: relative;
+      z-index: 5;
+    }
+    .tab {
+      padding: 9px 14px;
+      border: 2px solid var(--border);
+      border-radius: 24px;
+      background: var(--card);
+      cursor: pointer;
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--primary);
+      transition: all 0.2s;
+    }
+    .tab:hover { border-color: var(--accent); }
+    .tab.active {
+      background: var(--primary);
+      color: white;
+      border-color: var(--primary);
+    }
+    .section { display: none; }
+    .section.active { display: block; animation: fadeIn 0.25s; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
+    .card {
+      background: var(--card);
+      border-radius: 12px;
+      padding: 18px;
+      margin-bottom: 14px;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+      border: 1px solid var(--border);
+    }
+    .card h2 {
+      font-size: 1.1rem;
+      color: var(--primary);
+      margin-bottom: 8px;
+    }
+    .card .hint {
+      font-size: 0.82rem;
+      color: var(--muted);
+      margin-bottom: 12px;
+    }
+    .rule-box {
+      padding: 14px;
+      border-radius: 10px;
+      margin-bottom: 12px;
+      border-left: 5px solid;
+    }
+    .rule-box.by { background: var(--by); border-color: #1976d2; }
+    .rule-box.on { background: var(--on); border-color: #388e3c; }
+    .rule-box.in { background: var(--in); border-color: #f57c00; }
+    .rule-box h3 { font-size: 1rem; margin-bottom: 6px; }
+    .rule-box ul { margin-left: 18px; font-size: 0.9rem; }
+    .rule-box li { margin-bottom: 4px; }
+    .ex { font-style: italic; color: var(--muted); font-size: 0.85rem; }
+    .mcq-item { margin-bottom: 16px; }
+    .mcq-item .q { font-weight: 600; margin-bottom: 8px; font-size: 0.95rem; }
+    .mcq-options { display: flex; flex-direction: column; gap: 6px; }
+    .mcq-opt {
+      padding: 11px 14px;
+      border: 2px solid var(--border);
+      border-radius: 8px;
+      background: var(--card);
+      cursor: pointer;
+      text-align: left;
+      font-size: 0.9rem;
+      color: var(--text);
+      transition: all 0.15s;
+    }
+    .mcq-opt:hover:not(.disabled) { border-color: var(--accent); }
+    .mcq-opt.correct { border-color: var(--success); background: rgba(46,125,50,0.12); color: var(--success); }
+    .mcq-opt.wrong { border-color: var(--error); background: rgba(198,40,40,0.12); color: var(--error); }
+    .mcq-opt.disabled { pointer-events: none; opacity: 0.9; }
+    .gap-item {
+      margin-bottom: 14px;
+      padding: 14px;
+      background: var(--bg);
+      border-radius: 10px;
+    }
+    .gap-item label { display: block; margin-bottom: 8px; font-size: 0.95rem; }
+    .gap-item input[type="text"] {
+      width: 100%;
+      max-width: 280px;
+      padding: 10px 12px;
+      border: 2px solid var(--border);
+      border-radius: 8px;
+      font-size: 1rem;
+      outline: none;
+      background: var(--card);
+      color: var(--text);
+      text-align: center;
+      font-weight: 600;
+    }
+    .gap-item input:focus { border-color: var(--accent); }
+    .gap-item input.correct { border-color: var(--success); background: rgba(46,125,50,0.1); }
+    .gap-item input.incorrect { border-color: var(--error); background: rgba(198,40,40,0.1); }
+    .feedback { font-size: 0.85rem; margin-top: 6px; min-height: 1.3em; }
+    .feedback.ok { color: var(--success); }
+    .feedback.bad { color: var(--error); }
+    .actions { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 14px; }
+    .btn {
+      padding: 10px 18px;
+      border-radius: 8px;
+      border: none;
+      font-weight: 600;
+      font-size: 0.9rem;
+      cursor: pointer;
+      background: var(--primary);
+      color: white;
+    }
+    .btn:hover { opacity: 0.92; }
+    .btn.secondary { background: var(--card); color: var(--primary); border: 2px solid var(--border); }
+    .score-line {
+      font-size: 0.95rem;
+      font-weight: 600;
+      margin-top: 12px;
+      padding: 10px;
+      background: var(--bg);
+      border-radius: 8px;
+      text-align: center;
+    }
+    .table-wrap { overflow-x: auto; margin: 12px 0; }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.88rem;
+    }
+    th, td {
+      border: 1px solid var(--border);
+      padding: 10px 8px;
+      text-align: left;
+    }
+    th { background: var(--primary); color: white; }
+    tr:nth-child(even) { background: var(--bg); }
+    .match-area {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+    .match-col { display: flex; flex-direction: column; gap: 8px; }
+    .match-btn {
+      padding: 12px;
+      border: 2px solid var(--border);
+      border-radius: 10px;
+      background: var(--card);
+      color: var(--text);
+      cursor: pointer;
+      text-align: left;
+      font-size: 0.9rem;
+      transition: all 0.15s;
+      user-select: none;
+    }
+    .match-btn:hover:not(.disabled) { border-color: var(--accent); }
+    .match-btn.selected { border-color: var(--primary); background: rgba(31,78,121,0.1); }
+    .match-btn.correct { border-color: var(--success); background: rgba(46,125,50,0.12); color: var(--success); pointer-events: none; }
+    .match-btn.wrong { border-color: var(--error); background: rgba(198,40,40,0.12); animation: shake 0.3s; }
+    @keyframes shake { 0%,100%{transform:translateX(0)} 25%{transform:translateX(-4px)} 75%{transform:translateX(4px)} }
+    .progress-bar {
+      height: 8px;
+      background: var(--border);
+      border-radius: 4px;
+      margin: 12px 0;
+      overflow: hidden;
+    }
+    .progress-fill {
+      height: 100%;
+      background: var(--success);
+      width: 0%;
+      transition: width 0.3s;
+    }
+    .tip {
+      font-size: 0.85rem;
+      color: var(--muted);
+      padding: 10px 12px;
+      background: var(--bg);
+      border-radius: 8px;
+      margin-top: 10px;
+      border-left: 3px solid var(--accent);
+    }
+  
+    /* ========== iPhone / mobile adaptation ========== */
+    html {
+      -webkit-text-size-adjust: 100%;
+      text-size-adjust: 100%;
+    }
+    body {
+      -webkit-tap-highlight-color: transparent;
+      overscroll-behavior-y: contain;
+      padding-bottom: calc(40px + env(safe-area-inset-bottom, 0px));
+      min-height: 100dvh;
+    }
+    header {
+      padding-top: calc(14px + env(safe-area-inset-top, 0px));
+      padding-left: max(12px, env(safe-area-inset-left));
+      padding-right: max(12px, env(safe-area-inset-right));
+    }
+    .container {
+      padding-left: max(12px, env(safe-area-inset-left));
+      padding-right: max(12px, env(safe-area-inset-right));
+    }
+
+    /* Larger touch targets */
+    .tab {
+      min-height: 44px;
+      padding: 10px 14px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      -webkit-user-select: none;
+      user-select: none;
+    }
+    .tool-btn {
+      min-height: 36px;
+      padding: 8px 14px;
+      -webkit-user-select: none;
+      user-select: none;
+    }
+    .mcq-opt, .match-btn {
+      min-height: 48px;
+      padding: 12px 14px;
+      -webkit-user-select: none;
+      user-select: none;
+      touch-action: manipulation;
+    }
+    .btn {
+      min-height: 48px;
+      padding: 12px 20px;
+      touch-action: manipulation;
+      -webkit-user-select: none;
+      user-select: none;
+    }
+
+    /* Prevent iOS zoom on input focus */
+    .gap-item input[type="text"] {
+      font-size: 16px !important;
+      max-width: 100%;
+      border-radius: 10px;
+      min-height: 48px;
+    }
+
+    /* Tabs: wrap on mobile — NO horizontal scroll (iOS kills clicks inside overflow-x) */
+    .tabs {
+      flex-wrap: wrap !important;
+      overflow: visible !important;
+      gap: 8px;
+      padding: 8px 0 12px;
+      position: relative;
+      z-index: 5;
+      background: var(--bg);
+    }
+    .tab {
+      flex-shrink: 0;
+      font-size: 0.82rem;
+      white-space: nowrap;
+      cursor: pointer;
+      -webkit-appearance: none;
+      appearance: none;
+      touch-action: manipulation;
+      position: relative;
+      z-index: 6;
+      min-height: 44px;
+    }
+
+    /* Cards and text on small screens */
+    @media (max-width: 480px) {
+      header h1 { font-size: 1.1rem; line-height: 1.25; }
+      header p { font-size: 0.78rem; }
+      .card { padding: 14px 12px; border-radius: 14px; }
+      .card h2 { font-size: 1.02rem; }
+      .rule-box { padding: 12px; }
+      .rule-box h3 { font-size: 0.92rem; }
+      .rule-box ul { font-size: 0.86rem; margin-left: 14px; }
+      .mcq-item .q { font-size: 0.92rem; }
+      .mcq-opt { font-size: 0.9rem; }
+      .match-area {
+        grid-template-columns: 1fr;
+        gap: 10px;
+      }
+      .match-col { gap: 8px; }
+      .table-wrap { margin: 8px -4px; }
+      table { font-size: 0.78rem; }
+      th, td { padding: 8px 6px; }
+      .gap-item label { font-size: 0.9rem; }
+      .score-line { font-size: 0.9rem; padding: 12px; }
+      .actions { gap: 10px; }
+      .btn { width: 100%; }
+      .actions .btn.secondary { width: 100%; }
+    }
+
+    /* Slightly larger phones / landscape */
+    @media (max-width: 380px) {
+      header h1 { font-size: 1rem; }
+      .tab { padding: 9px 11px; font-size: 0.78rem; }
+    }
+
+    /* Dark mode status bar friendly */
+    @media (prefers-color-scheme: dark) {
+      /* optional: auto dark if user hasn't chosen — leave manual only */
+    }
+
+
+    @media (max-width: 480px) {
+      header {
+        position: sticky;
+        top: 0;
+        z-index: 100;
+      }
+    }
+
+    /* Active press feedback for touch */
+    .mcq-opt:active:not(.disabled),
+    .match-btn:active:not(.disabled):not(.correct),
+    .tab:active,
+    .btn:active,
+    .tool-btn:active {
+      opacity: 0.85;
+      transform: scale(0.98);
+    }
+
+  </style>
 </head>
 <body>
-<h1>Prepositions + Transport</h1>
-<p>by bus · on the train · in a taxi · get on/off</p>
-<div class="card">
-<p><b>Загрузите полный файл один раз:</b></p>
-<ol>
-<li><a href="https://github.com/uladzislaushevchik-sudo/prepositions-transport/upload/main">Upload files</a></li>
-<li>Файл <code>Prepositions_Transport_Interactive.html</code> → переименовать в <code>index.html</code></li>
-<li>Commit → Settings → Pages → main / root</li>
-</ol>
-<p><a class="btn" href="https://github.com/uladzislaushevchik-sudo/prepositions-transport/upload/main">Загрузить →</a></p>
-</div>
+  <header>
+    <h1>Предлоги с транспортом</h1>
+    <p>by / on / in + get on/off · get in/out · arrive in/at</p>
+    <div class="header-tools">
+      <button class="tool-btn" id="themeBtn" onclick="toggleTheme()">🌙 Тёмная</button>
+      <button class="tool-btn" onclick="resetAll()">↺ Сбросить всё</button>
+    </div>
+  </header>
+
+  <div class="container">
+    <div class="tabs" id="tabsBar" role="tablist">
+      <button type="button" class="tab active" data-tab="theory" onclick="switchTab(this)">Теория</button>
+      <button type="button" class="tab" data-tab="mcq1" onclick="switchTab(this)">Выбор 1</button>
+      <button type="button" class="tab" data-tab="fill" onclick="switchTab(this)">Заполни</button>
+      <button type="button" class="tab" data-tab="errors" onclick="switchTab(this)">Ошибки</button>
+      <button type="button" class="tab" data-tab="match" onclick="switchTab(this)">Соедини</button>
+      <button type="button" class="tab" data-tab="verbs" onclick="switchTab(this)">Посадка</button>
+      <button type="button" class="tab" data-tab="mixed" onclick="switchTab(this)">Микс</button>
+    </div>
+
+    <!-- THEORY -->
+    <div id="theory" class="section active">
+      <div class="card">
+        <h2>Золотое правило</h2>
+        <p class="hint">Один вопрос помогает выбрать предлог в 90% случаев.</p>
+        <div class="rule-box by">
+          <h3>🔵 by + транспорт = СПОСОБ («Как?»)</h3>
+          <ul>
+            <li>Абстрактный способ передвижения</li>
+            <li><strong>Без артикля!</strong> by car, by bus, by train, by plane</li>
+            <li class="ex">I go to work <strong>by bus</strong>.</li>
+          </ul>
+        </div>
+        <div class="rule-box on">
+          <h3>🟢 on + транспорт = ГДЕ? (большой / поверхность)</h3>
+          <ul>
+            <li>Можно стоять или ходить: on a bus, on a train, on a plane, on a ship</li>
+            <li>Сидим сверху: on a bike, on a motorcycle</li>
+            <li>Пешком: <strong>on foot</strong> (никогда by foot!)</li>
+            <li class="ex">I'm <strong>on the bus</strong> now. / He came <strong>on his bike</strong>.</li>
+          </ul>
+        </div>
+        <div class="rule-box in">
+          <h3>🟠 in + транспорт = ГДЕ? (маленький закрытый)</h3>
+          <ul>
+            <li>Машина, такси, фургон — только сидеть: in a car, in a taxi</li>
+            <li class="ex">She is sitting <strong>in the car</strong>.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="card">
+        <h2>Сводная таблица</h2>
+        <div class="table-wrap">
+          <table>
+            <tr><th>Транспорт</th><th>Способ (by)</th><th>Где (in/on)</th><th>Пример</th></tr>
+            <tr><td>Пешком</td><td>—</td><td>on foot</td><td>I go on foot</td></tr>
+            <tr><td>Машина</td><td>by car</td><td>in a car</td><td>by car / in the car</td></tr>
+            <tr><td>Такси</td><td>by taxi</td><td>in a taxi</td><td>by taxi / in a taxi</td></tr>
+            <tr><td>Автобус</td><td>by bus</td><td>on a bus</td><td>by bus / on the bus</td></tr>
+            <tr><td>Поезд</td><td>by train</td><td>on a train</td><td>by train / on the train</td></tr>
+            <tr><td>Самолёт</td><td>by plane</td><td>on a plane</td><td>by plane / on a plane</td></tr>
+            <tr><td>Велосипед</td><td>by bike</td><td>on a bike</td><td>by bike / on my bike</td></tr>
+          </table>
+        </div>
+      </div>
+
+      <div class="card">
+        <h2>Посадка и высадка</h2>
+        <div class="rule-box in">
+          <h3>Машина / такси</h3>
+          <ul>
+            <li><strong>get in</strong> / <strong>get out of</strong></li>
+            <li class="ex">Get in the car! / She got out of the taxi.</li>
+          </ul>
+        </div>
+        <div class="rule-box on">
+          <h3>Автобус, поезд, самолёт, велосипед</h3>
+          <ul>
+            <li><strong>get on</strong> / <strong>get off</strong></li>
+            <li class="ex">We got on the bus. / Don't get off the train yet.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="card">
+        <h2>Arrive + предлог</h2>
+        <ul style="margin-left:18px; font-size:0.95rem;">
+          <li><strong>arrive in</strong> — город, страна, большой регион<br><span class="ex">We arrived in London. / She arrived in France.</span></li>
+          <li><strong>arrive at</strong> — станция, аэропорт, отель, остановка<br><span class="ex">He arrived at the station. / They arrived at the airport.</span></li>
+          <li>Никогда <strong>arrive to</strong>!</li>
+        </ul>
+        <div class="tip">💡 leave <strong>for</strong> (куда) · depart <strong>from</strong> (откуда)</div>
+      </div>
+
+      <div class="card">
+        <h2>Частые ошибки</h2>
+        <ul style="margin-left:18px; font-size:0.9rem;">
+          <li>❌ with bus → ✅ by bus</li>
+          <li>❌ on car → ✅ by car / in a car</li>
+          <li>❌ in plane → ✅ by plane / on a plane</li>
+          <li>❌ get in the bus → ✅ get on the bus</li>
+          <li>❌ by foot → ✅ on foot</li>
+          <li>❌ by my car → ✅ in my car / by car</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- MCQ 1 -->
+    <div id="mcq1" class="section">
+      <div class="card">
+        <h2>Выбери правильный предлог</h2>
+        <p class="hint">Нажми на правильный вариант. Сразу увидишь, верно или нет.</p>
+        <div id="mcq1-list"></div>
+        <div class="score-line" id="mcq1-score">Правильно: 0 / 0</div>
+        <div class="progress-bar"><div class="progress-fill" id="mcq1-progress"></div></div>
+      </div>
+    </div>
+
+    <!-- FILL -->
+    <div id="fill" class="section">
+      <div class="card">
+        <h2>Заполни пропуск</h2>
+        <p class="hint">Впиши предлог (by / on / in / at / to / for / from / into / out of...). Нажми «Проверить».</p>
+        <div id="fill-list"></div>
+        <div class="actions">
+          <button class="btn" onclick="checkFill()">Проверить</button>
+          <button class="btn secondary" onclick="resetFill()">Сбросить</button>
+        </div>
+        <div class="score-line" id="fill-score">Правильно: 0 / 0</div>
+      </div>
+    </div>
+
+    <!-- ERRORS -->
+    <div id="errors" class="section">
+      <div class="card">
+        <h2>Найди и исправь ошибку</h2>
+        <p class="hint">В каждом предложении есть ошибка. Нажми на правильный вариант исправления.</p>
+        <div id="errors-list"></div>
+        <div class="score-line" id="errors-score">Правильно: 0 / 0</div>
+      </div>
+    </div>
+
+    <!-- MATCH -->
+    <div id="match" class="section">
+      <div class="card">
+        <h2>Соедини транспорт и предлог</h2>
+        <p class="hint">Сначала выбери транспорт слева, потом правильный предлог/фразу справа.</p>
+        <div class="match-area">
+          <div class="match-col" id="match-left"></div>
+          <div class="match-col" id="match-right"></div>
+        </div>
+        <div class="score-line" id="match-score">Соединено: 0 / 16</div>
+        <div class="actions">
+          <button class="btn secondary" onclick="resetMatch()">Сбросить</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- VERBS -->
+    <div id="verbs" class="section">
+      <div class="card">
+        <h2>Посадка / высадка + arrive</h2>
+        <p class="hint">Выбери правильный глагол + предлог.</p>
+        <div id="verbs-list"></div>
+        <div class="score-line" id="verbs-score">Правильно: 0 / 0</div>
+      </div>
+    </div>
+
+    <!-- MIXED -->
+    <div id="mixed" class="section">
+      <div class="card">
+        <h2>Микс: транспорт + место + время + направление</h2>
+        <p class="hint">Повторяем всё, что уже проходили. Выбери правильный предлог.</p>
+        <div id="mixed-list"></div>
+        <div class="score-line" id="mixed-score">Правильно: 0 / 0</div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Theme
+    function safeStorageGet(key) {
+      try { return localStorage.getItem(key); } catch (e) { return null; }
+    }
+    function safeStorageSet(key, val) {
+      try { localStorage.setItem(key, val); } catch (e) {}
+    }
+    function toggleTheme() {
+      const html = document.documentElement;
+      const isDark = html.getAttribute('data-theme') === 'dark';
+      html.setAttribute('data-theme', isDark ? '' : 'dark');
+      document.getElementById('themeBtn').textContent = isDark ? '🌙 Тёмная' : '☀️ Светлая';
+      safeStorageSet('theme', isDark ? 'light' : 'dark');
+    }
+    if (safeStorageGet('theme') === 'dark') {
+      document.documentElement.setAttribute('data-theme', 'dark');
+      var tb = document.getElementById('themeBtn');
+      if (tb) tb.textContent = '☀️ Светлая';
+    }
+
+    // Tabs — global + event delegation (iPhone-safe)
+    window.switchTab = function(tab) {
+      if (!tab) return;
+      var id = tab.getAttribute('data-tab');
+      if (!id) return;
+      var section = document.getElementById(id);
+      if (!section) {
+        console.warn('section not found', id);
+        return;
+      }
+      var tabs = document.querySelectorAll('.tab');
+      for (var i = 0; i < tabs.length; i++) tabs[i].classList.remove('active');
+      var sections = document.querySelectorAll('.section');
+      for (var j = 0; j < sections.length; j++) sections[j].classList.remove('active');
+      tab.classList.add('active');
+      section.classList.add('active');
+    };
+
+    // Backup: delegation (works even if inline onclick is blocked)
+    document.addEventListener('click', function(e) {
+      var t = e.target;
+      if (!t) return;
+      // climb up to button.tab
+      var el = t;
+      while (el && el !== document.body) {
+        if (el.classList && el.classList.contains('tab') && el.getAttribute('data-tab')) {
+          window.switchTab(el);
+          return;
+        }
+        el = el.parentNode;
+      }
+    }, false);
+
+    // ========== shuffle helpers ==========
+    function shuffleArr(arr) {
+      const a = arr.slice();
+      for (let i = a.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        const t = a[i]; a[i] = a[j]; a[j] = t;
+      }
+      return a;
+    }
+    function prepareMcqItem(item) {
+      // Store correct answer text, shuffle opts, recompute ans index
+      const correct = item.opts[item.ans];
+      const opts = shuffleArr(item.opts);
+      return { ...item, opts, ans: opts.indexOf(correct), answer: correct };
+    }
+
+    // ========== MCQ 1 ==========
+    const mcq1Data = [
+      { q: "I go to work ___ bus every day.", opts: ["by", "on", "in", "with"], ans: 0 },
+      { q: "She is sitting ___ the car now.", opts: ["by", "on", "in", "at"], ans: 2 },
+      { q: "We are ___ the train to Moscow.", opts: ["by", "on", "in", "at"], ans: 1 },
+      { q: "He came to school ___ foot.", opts: ["by", "on", "in", "with"], ans: 1 },
+      { q: "They travelled to Spain ___ plane.", opts: ["by", "on", "in", "at"], ans: 0 },
+      { q: "I'm ___ a taxi right now.", opts: ["by", "on", "in", "at"], ans: 2 },
+      { q: "She prefers to travel ___ train.", opts: ["by", "on", "in", "with"], ans: 0 },
+      { q: "Don't stand ___ the bike like that!", opts: ["by", "on", "in", "at"], ans: 1 },
+      { q: "We went there ___ my car.", opts: ["by", "on", "in", "with"], ans: 2 },
+      { q: "I never go ___ metro in the morning.", opts: ["by", "on", "in", "at"], ans: 0 },
+      { q: "He is ___ the plane to London.", opts: ["by", "on", "in", "at"], ans: 1 },
+      { q: "They arrived home ___ taxi.", opts: ["by", "on", "in", "with"], ans: 0 },
+      { q: "Do you usually go ___ car or ___ bus?", opts: ["by / by", "on / on", "in / in", "with / with"], ans: 0 },
+      { q: "There were a lot of people ___ the bus.", opts: ["by", "on", "in", "at"], ans: 1 },
+      { q: "She hates sitting ___ a small car for a long time.", opts: ["by", "on", "in", "at"], ans: 2 },
+      { q: "We can go ___ boat or ___ plane.", opts: ["by / by", "on / on", "in / in", "with / with"], ans: 0 },
+      { q: "He was ___ his motorcycle when I saw him.", opts: ["by", "on", "in", "at"], ans: 1 },
+      { q: "I like travelling ___ train more than ___ plane.", opts: ["by / by", "on / on", "in / in", "with / with"], ans: 0 },
+      { q: "Please wait for me ___ the car.", opts: ["by", "on", "in", "at"], ans: 2 },
+      { q: "How do you get to work? — ___ bike.", opts: ["By", "On", "In", "With"], ans: 0 },
+      { q: "The children were ___ the school bus.", opts: ["by", "on", "in", "at"], ans: 1 },
+      { q: "It's faster to go ___ taxi.", opts: ["by", "on", "in", "with"], ans: 0 },
+      { q: "She fell asleep ___ the plane.", opts: ["by", "on", "in", "at"], ans: 1 },
+      { q: "We drove there ___ her van.", opts: ["by", "on", "in", "with"], ans: 2 }
+    ];
+    let mcq1Done = 0, mcq1Correct = 0;
+    let mcq1Items = [];
+    function renderMcq1() {
+      mcq1Done = 0; mcq1Correct = 0;
+      mcq1Items = mcq1Data.map(prepareMcqItem);
+      const list = document.getElementById('mcq1-list');
+      list.innerHTML = mcq1Items.map((item, i) => `
+        <div class="mcq-item" id="mcq1-${i}">
+          <div class="q">${i+1}. ${item.q}</div>
+          <div class="mcq-options">
+            ${item.opts.map((o, j) => `<button type="button" class="mcq-opt" onclick="answerMcq1(${i},${j})">${o}</button>`).join('')}
+          </div>
+        </div>
+      `).join('');
+    }
+    function answerMcq1(qi, oi) {
+      const item = mcq1Items[qi];
+      const btns = document.querySelectorAll(`#mcq1-${qi} .mcq-opt`);
+      if (btns[0].classList.contains('disabled')) return;
+      btns.forEach(b => b.classList.add('disabled'));
+      mcq1Done++;
+      if (oi === item.ans) {
+        btns[oi].classList.add('correct');
+        mcq1Correct++;
+      } else {
+        btns[oi].classList.add('wrong');
+        btns[item.ans].classList.add('correct');
+      }
+      updateMcq1Score();
+    }
+    function updateMcq1Score() {
+      document.getElementById('mcq1-score').textContent = `Правильно: ${mcq1Correct} / ${mcq1Done}`;
+      document.getElementById('mcq1-progress').style.width = (mcq1Done / mcq1Data.length * 100) + '%';
+    }
+    renderMcq1();
+
+    // ========== FILL ==========
+    const fillData = [
+      { q: "We travelled to Spain ___ plane.", ans: ["by"], hint: "способ" },
+      { q: "She usually goes to university ___ foot.", ans: ["on"], hint: "пешком" },
+      { q: "Get ___ the car, it's raining!", ans: ["in", "into"], hint: "посадка в машину" },
+      { q: "I saw him ___ the bus this morning.", ans: ["on"], hint: "внутри автобуса" },
+      { q: "They came ___ taxi because it was late.", ans: ["by"], hint: "способ" },
+      { q: "We got ___ the train just in time.", ans: ["on"], hint: "посадка на поезд" },
+      { q: "She got ___ of the taxi near the theatre.", ans: ["out"], hint: "высадка из такси" },
+      { q: "He arrived ___ the airport at 6.", ans: ["at"], hint: "конкретное место" },
+      { q: "They arrived ___ Paris yesterday.", ans: ["in"], hint: "город" },
+      { q: "We are leaving ___ London tomorrow.", ans: ["for"], hint: "leave for" },
+      { q: "The flight departs ___ Terminal 3.", ans: ["from"], hint: "depart from" },
+      { q: "I go to the shop ___ foot every day.", ans: ["on"], hint: "пешком" },
+      { q: "She prefers to go ___ car.", ans: ["by"], hint: "способ" },
+      { q: "There is no more space ___ the train.", ans: ["on"], hint: "внутри" },
+      { q: "Please get ___ the bus carefully.", ans: ["off"], hint: "высадка" },
+      { q: "He got ___ his bike and rode away.", ans: ["on"], hint: "посадка на велосипед" },
+      { q: "We waited for her ___ the car.", ans: ["in"], hint: "внутри машины" },
+      { q: "I never travel ___ boat. I get sick.", ans: ["by"], hint: "способ" },
+      { q: "They got ___ the plane in Dubai.", ans: ["off"], hint: "высадка" },
+      { q: "She arrived ___ the station early.", ans: ["at"], hint: "станция" },
+      { q: "How did you get here? — ___ taxi.", ans: ["by"], hint: "способ" },
+      { q: "Don't leave your bag ___ the bus!", ans: ["on"], hint: "внутри" },
+      { q: "We are going ___ Italy ___ train.", ans: ["to", "by"], hint: "направление + способ (напиши оба через пробел: to by)" },
+      { q: "He is sitting ___ a taxi right now.", ans: ["in"], hint: "внутри" }
+    ];
+    function renderFill() {
+      const list = document.getElementById('fill-list');
+      list.innerHTML = fillData.map((item, i) => `
+        <div class="gap-item" id="fill-${i}">
+          <label>${i+1}. ${item.q} <span style="color:var(--muted);font-size:0.8rem">(${item.hint})</span></label>
+          <input type="text" id="fill-input-${i}" placeholder="предлог..." autocomplete="off">
+          <div class="feedback" id="fill-fb-${i}"></div>
+        </div>
+      `).join('');
+    }
+    function checkFill() {
+      let correct = 0;
+      fillData.forEach((item, i) => {
+        const input = document.getElementById('fill-input-' + i);
+        const fb = document.getElementById('fill-fb-' + i);
+        const val = input.value.trim().toLowerCase().replace(/\s+/g, ' ');
+        const ok = item.ans.some(a => a.toLowerCase() === val) ||
+                   (item.ans.length > 1 && val === item.ans.map(a => a.toLowerCase()).join(' '));
+        if (ok) {
+          input.classList.add('correct');
+          input.classList.remove('incorrect');
+          fb.textContent = '✓ Верно';
+          fb.className = 'feedback ok';
+          correct++;
+        } else {
+          input.classList.add('incorrect');
+          input.classList.remove('correct');
+          fb.textContent = '✗ Правильно: ' + item.ans.join(' / ');
+          fb.className = 'feedback bad';
+        }
+      });
+      document.getElementById('fill-score').textContent = `Правильно: ${correct} / ${fillData.length}`;
+    }
+    function resetFill() {
+      fillData.forEach((_, i) => {
+        const input = document.getElementById('fill-input-' + i);
+        input.value = '';
+        input.classList.remove('correct', 'incorrect');
+        document.getElementById('fill-fb-' + i).textContent = '';
+      });
+      document.getElementById('fill-score').textContent = 'Правильно: 0 / 0';
+    }
+    renderFill();
+
+    // ========== ERRORS ==========
+    const errorsData = [
+      { bad: "I go to work in bus every day.", opts: ["I go to work by bus every day.", "I go to work on bus every day.", "I go to work with bus every day."], ans: 0 },
+      { bad: "She arrived in the bus stop at 8.", opts: ["She arrived at the bus stop at 8.", "She arrived on the bus stop at 8.", "She arrived to the bus stop at 8."], ans: 0 },
+      { bad: "We got in the train just in time.", opts: ["We got on the train just in time.", "We got into the train just in time.", "We got by the train just in time."], ans: 0 },
+      { bad: "He prefers travelling with train.", opts: ["He prefers travelling by train.", "He prefers travelling on train.", "He prefers travelling in train."], ans: 0 },
+      { bad: "I was sitting on my car when you called.", opts: ["I was sitting in my car when you called.", "I was sitting by my car when you called.", "I was sitting at my car when you called."], ans: 0 },
+      { bad: "She goes to school by foot.", opts: ["She goes to school on foot.", "She goes to school in foot.", "She goes to school with foot."], ans: 0 },
+      { bad: "They arrived to London last week.", opts: ["They arrived in London last week.", "They arrived at London last week.", "They arrived on London last week."], ans: 0 },
+      { bad: "Get in the bus, please!", opts: ["Get on the bus, please!", "Get into the bus, please!", "Get by the bus, please!"], ans: 0 },
+      { bad: "I came on car yesterday.", opts: ["I came by car yesterday.", "I came in car yesterday.", "I came with car yesterday."], ans: 0 },
+      { bad: "She is flying in plane to Rome.", opts: ["She is flying by plane to Rome. / She is on a plane to Rome.", "She is flying on plane to Rome.", "She is flying at plane to Rome."], ans: 0 },
+      { bad: "We got out from the taxi.", opts: ["We got out of the taxi.", "We got off the taxi.", "We got out the taxi."], ans: 0 },
+      { bad: "He left to Paris yesterday.", opts: ["He left for Paris yesterday.", "He left from Paris yesterday.", "He left at Paris yesterday."], ans: 0 },
+      { bad: "The train departs at Moscow.", opts: ["The train departs from Moscow.", "The train departs for Moscow.", "The train departs in Moscow."], ans: 0 },
+      { bad: "I go to work with my bike.", opts: ["I go to work on my bike. / I go by bike.", "I go to work in my bike.", "I go to work by my bike."], ans: 0 },
+      { bad: "She waited me on the car.", opts: ["She waited for me in the car.", "She waited me by the car.", "She waited me at the car."], ans: 0 }
+    ];
+    let errorsDone = 0, errorsCorrect = 0;
+    let errorsItems = [];
+    function renderErrors() {
+      errorsDone = 0; errorsCorrect = 0;
+      errorsItems = errorsData.map(prepareMcqItem);
+      const list = document.getElementById('errors-list');
+      list.innerHTML = errorsItems.map((item, i) => `
+        <div class="mcq-item" id="err-${i}">
+          <div class="q">${i+1}. ❌ ${item.bad}</div>
+          <div class="mcq-options">
+            ${item.opts.map((o, j) => `<button type="button" class="mcq-opt" onclick="answerError(${i},${j})">${o}</button>`).join('')}
+          </div>
+        </div>
+      `).join('');
+    }
+    function answerError(qi, oi) {
+      const item = errorsItems[qi];
+      const btns = document.querySelectorAll(`#err-${qi} .mcq-opt`);
+      if (btns[0].classList.contains('disabled')) return;
+      btns.forEach(b => b.classList.add('disabled'));
+      errorsDone++;
+      if (oi === item.ans) {
+        btns[oi].classList.add('correct');
+        errorsCorrect++;
+      } else {
+        btns[oi].classList.add('wrong');
+        btns[item.ans].classList.add('correct');
+      }
+      document.getElementById('errors-score').textContent = `Правильно: ${errorsCorrect} / ${errorsDone}`;
+    }
+    renderErrors();
+
+    // ========== MATCH ==========
+    const matchPairs = [
+      { left: "способ: машина", right: "by car" },
+      { left: "внутри: машина", right: "in a car" },
+      { left: "способ: автобус", right: "by bus" },
+      { left: "внутри: автобус", right: "on a bus" },
+      { left: "пешком", right: "on foot" },
+      { left: "внутри: такси", right: "in a taxi" },
+      { left: "способ: самолёт", right: "by plane" },
+      { left: "внутри: поезд", right: "on a train" },
+      { left: "способ: велосипед", right: "by bike" },
+      { left: "на велосипеде (где)", right: "on a bike" },
+      { left: "способ: такси", right: "by taxi" },
+      { left: "посадка в машину", right: "get in" },
+      { left: "посадка на автобус", right: "get on" },
+      { left: "высадка из такси", right: "get out of" },
+      { left: "высадка с поезда", right: "get off" },
+      { left: "прибыть в город", right: "arrive in" }
+    ];
+    let matchSelected = null;
+    let matchDone = 0;
+    function shuffle(arr) {
+      const a = [...arr];
+      for (let i = a.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [a[i], a[j]] = [a[j], a[i]];
+      }
+      return a;
+    }
+    function renderMatch() {
+      matchDone = 0;
+      matchSelected = null;
+      const left = shuffle(matchPairs.map((p, i) => ({ text: p.left, id: i })));
+      const right = shuffle(matchPairs.map((p, i) => ({ text: p.right, id: i })));
+      document.getElementById('match-left').innerHTML = left.map(p =>
+        `<button type="button" class="match-btn" data-id="${p.id}" data-side="left" onclick="selectMatch(this)">${p.text}</button>`
+      ).join('');
+      document.getElementById('match-right').innerHTML = right.map(p =>
+        `<button type="button" class="match-btn" data-id="${p.id}" data-side="right" onclick="selectMatch(this)">${p.text}</button>`
+      ).join('');
+      document.getElementById('match-score').textContent = 'Соединено: 0 / ' + matchPairs.length;
+    }
+    function selectMatch(btn) {
+      if (btn.classList.contains('correct') || btn.classList.contains('disabled')) return;
+      if (!matchSelected) {
+        document.querySelectorAll('.match-btn.selected').forEach(b => b.classList.remove('selected'));
+        btn.classList.add('selected');
+        matchSelected = btn;
+        return;
+      }
+      if (matchSelected === btn) {
+        btn.classList.remove('selected');
+        matchSelected = null;
+        return;
+      }
+      if (matchSelected.dataset.side === btn.dataset.side) {
+        matchSelected.classList.remove('selected');
+        btn.classList.add('selected');
+        matchSelected = btn;
+        return;
+      }
+      const id1 = matchSelected.dataset.id;
+      const id2 = btn.dataset.id;
+      if (id1 === id2) {
+        matchSelected.classList.remove('selected');
+        matchSelected.classList.add('correct');
+        btn.classList.add('correct');
+        matchSelected = null;
+        matchDone++;
+        document.getElementById('match-score').textContent = `Соединено: ${matchDone} / ${matchPairs.length}`;
+      } else {
+        matchSelected.classList.add('wrong');
+        btn.classList.add('wrong');
+        const m = matchSelected;
+        setTimeout(() => {
+          m.classList.remove('wrong', 'selected');
+          btn.classList.remove('wrong');
+        }, 600);
+        matchSelected = null;
+      }
+    }
+    function resetMatch() { renderMatch(); }
+    renderMatch();
+
+    // ========== VERBS ==========
+    const verbsData = [
+      { q: "___ the car, we're late!", opts: ["Get in", "Get on", "Get off", "Get out"], ans: 0 },
+      { q: "She ___ the taxi near the theatre.", opts: ["got out of", "got off", "got on", "got in"], ans: 0 },
+      { q: "We ___ the bus in the city centre.", opts: ["got on", "got in", "got out of", "got off"], ans: 0 },
+      { q: "Don't ___ the train before your station.", opts: ["get off", "get out of", "get in", "get on"], ans: 0 },
+      { q: "He arrived ___ the station at 9.", opts: ["at", "in", "on", "to"], ans: 0 },
+      { q: "They arrived ___ Italy last month.", opts: ["in", "at", "on", "to"], ans: 0 },
+      { q: "We are leaving ___ Paris tomorrow.", opts: ["for", "to", "from", "at"], ans: 0 },
+      { q: "The plane departs ___ Terminal 2.", opts: ["from", "for", "at", "in"], ans: 0 },
+      { q: "Please ___ the plane now.", opts: ["get on", "get in", "get out of", "get off"], ans: 0 },
+      { q: "She ___ her bike and rode away.", opts: ["got on", "got in", "got out of", "got off"], ans: 0 },
+      { q: "I ___ the taxi and paid the driver.", opts: ["got out of", "got off", "got on", "got in"], ans: 0 },
+      { q: "They ___ the ship in Southampton.", opts: ["got off", "got out of", "got in", "got on"], ans: 0 },
+      { q: "We arrived ___ the hotel late.", opts: ["at", "in", "on", "to"], ans: 0 },
+      { q: "She arrived ___ France in June.", opts: ["in", "at", "on", "to"], ans: 0 },
+      { q: "The bus leaves ___ the central station.", opts: ["from", "for", "at", "in"], ans: 0 },
+      { q: "I'm leaving ___ work in 10 minutes.", opts: ["for", "to", "from", "at"], ans: 0 },
+      { q: "___ the tram carefully, it's slippery.", opts: ["Get off", "Get out of", "Get in", "Get by"], ans: 0 },
+      { q: "He ___ the van and closed the door.", opts: ["got in", "got on", "got off", "got out"], ans: 0 }
+    ];
+    let verbsDone = 0, verbsCorrect = 0;
+    let verbsItems = [];
+    function renderVerbs() {
+      verbsDone = 0; verbsCorrect = 0;
+      verbsItems = verbsData.map(prepareMcqItem);
+      const list = document.getElementById('verbs-list');
+      list.innerHTML = verbsItems.map((item, i) => `
+        <div class="mcq-item" id="verb-${i}">
+          <div class="q">${i+1}. ${item.q}</div>
+          <div class="mcq-options">
+            ${item.opts.map((o, j) => `<button type="button" class="mcq-opt" onclick="answerVerb(${i},${j})">${o}</button>`).join('')}
+          </div>
+        </div>
+      `).join('');
+    }
+    function answerVerb(qi, oi) {
+      const item = verbsItems[qi];
+      const btns = document.querySelectorAll(`#verb-${qi} .mcq-opt`);
+      if (btns[0].classList.contains('disabled')) return;
+      btns.forEach(b => b.classList.add('disabled'));
+      verbsDone++;
+      if (oi === item.ans) {
+        btns[oi].classList.add('correct');
+        verbsCorrect++;
+      } else {
+        btns[oi].classList.add('wrong');
+        btns[item.ans].classList.add('correct');
+      }
+      document.getElementById('verbs-score').textContent = `Правильно: ${verbsCorrect} / ${verbsDone}`;
+    }
+    renderVerbs();
+
+    // ========== MIXED ==========
+    const mixedData = [
+      { q: "I get up ___ 7 o'clock.", opts: ["at", "in", "on", "by"], ans: 0, topic: "время" },
+      { q: "She was born ___ May.", opts: ["in", "on", "at", "by"], ans: 0, topic: "время" },
+      { q: "We meet ___ Monday.", opts: ["on", "in", "at", "by"], ans: 0, topic: "время" },
+      { q: "The book is ___ the table.", opts: ["on", "in", "at", "by"], ans: 0, topic: "место" },
+      { q: "He lives ___ Moscow.", opts: ["in", "on", "at", "by"], ans: 0, topic: "место" },
+      { q: "I'm waiting ___ the bus stop.", opts: ["at", "in", "on", "by"], ans: 0, topic: "место" },
+      { q: "Go ___ the shop and turn left.", opts: ["to", "in", "at", "on"], ans: 0, topic: "направление" },
+      { q: "She walked ___ the room.", opts: ["into", "in", "on", "at"], ans: 0, topic: "направление" },
+      { q: "Take the book ___ the shelf.", opts: ["off", "from", "out of", "of"], ans: 0, topic: "направление" },
+      { q: "I go to work ___ bus.", opts: ["by", "on", "in", "with"], ans: 0, topic: "транспорт" },
+      { q: "She is ___ the train now.", opts: ["on", "in", "by", "at"], ans: 0, topic: "транспорт" },
+      { q: "Get ___ the car!", opts: ["in", "on", "by", "at"], ans: 0, topic: "транспорт" },
+      { q: "They arrived ___ the airport.", opts: ["at", "in", "on", "to"], ans: 0, topic: "транспорт" },
+      { q: "He came ___ foot.", opts: ["on", "by", "in", "with"], ans: 0, topic: "транспорт" },
+      { q: "We are leaving ___ Berlin tomorrow.", opts: ["for", "to", "from", "at"], ans: 0, topic: "транспорт" },
+      { q: "The keys are ___ my bag.", opts: ["in", "on", "at", "by"], ans: 0, topic: "место" },
+      { q: "I'll see you ___ the evening.", opts: ["in", "on", "at", "by"], ans: 0, topic: "время" },
+      { q: "The picture is ___ the wall.", opts: ["on", "in", "at", "by"], ans: 0, topic: "место" },
+      { q: "She jumped ___ the water.", opts: ["into", "in", "on", "at"], ans: 0, topic: "направление" },
+      { q: "We walked ___ the park.", opts: ["through", "across", "into", "on"], ans: 0, topic: "направление" },
+      { q: "He goes to bed ___ night.", opts: ["at", "in", "on", "by"], ans: 0, topic: "время" },
+      { q: "The cat is ___ the box.", opts: ["in", "on", "at", "by"], ans: 0, topic: "место" },
+      { q: "Turn ___ the left at the corner.", opts: ["to", "on", "in", "at"], ans: 0, topic: "направление" },
+      { q: "I was born ___ 1995.", opts: ["in", "on", "at", "by"], ans: 0, topic: "время" },
+      { q: "She is waiting ___ the door.", opts: ["at", "in", "on", "by"], ans: 0, topic: "место" },
+      { q: "They travelled ___ car all night.", opts: ["by", "on", "in", "with"], ans: 0, topic: "транспорт" },
+      { q: "Please get ___ the tram here.", opts: ["off", "out of", "in", "by"], ans: 0, topic: "транспорт" },
+      { q: "We arrived ___ the hotel at midnight.", opts: ["at", "in", "on", "to"], ans: 0, topic: "транспорт" },
+      { q: "He took the book ___ his bag.", opts: ["out of", "off", "from", "of"], ans: 0, topic: "направление" },
+      { q: "The meeting is ___ Friday.", opts: ["on", "in", "at", "by"], ans: 0, topic: "время" }
+    ];
+    let mixedDone = 0, mixedCorrect = 0;
+    let mixedItems = [];
+    function renderMixed() {
+      mixedDone = 0; mixedCorrect = 0;
+      mixedItems = mixedData.map(prepareMcqItem);
+      const list = document.getElementById('mixed-list');
+      list.innerHTML = mixedItems.map((item, i) => `
+        <div class="mcq-item" id="mix-${i}">
+          <div class="q">${i+1}. ${item.q} <span style="font-size:0.75rem;color:var(--muted)">[${item.topic}]</span></div>
+          <div class="mcq-options">
+            ${item.opts.map((o, j) => `<button type="button" class="mcq-opt" onclick="answerMixed(${i},${j})">${o}</button>`).join('')}
+          </div>
+        </div>
+      `).join('');
+    }
+    function answerMixed(qi, oi) {
+      const item = mixedItems[qi];
+      const btns = document.querySelectorAll(`#mix-${qi} .mcq-opt`);
+      if (btns[0].classList.contains('disabled')) return;
+      btns.forEach(b => b.classList.add('disabled'));
+      mixedDone++;
+      if (oi === item.ans) {
+        btns[oi].classList.add('correct');
+        mixedCorrect++;
+      } else {
+        btns[oi].classList.add('wrong');
+        btns[item.ans].classList.add('correct');
+      }
+      document.getElementById('mixed-score').textContent = `Правильно: ${mixedCorrect} / ${mixedDone}`;
+    }
+    renderMixed();
+
+    function resetAll() {
+      mcq1Done = 0; mcq1Correct = 0;
+      renderMcq1();
+      updateMcq1Score();
+      resetFill();
+      errorsDone = 0; errorsCorrect = 0;
+      renderErrors();
+      document.getElementById('errors-score').textContent = 'Правильно: 0 / 0';
+      resetMatch();
+      verbsDone = 0; verbsCorrect = 0;
+      renderVerbs();
+      document.getElementById('verbs-score').textContent = 'Правильно: 0 / 0';
+      mixedDone = 0; mixedCorrect = 0;
+      renderMixed();
+      document.getElementById('mixed-score').textContent = 'Правильно: 0 / 0';
+    }
+  </script>
 </body>
 </html>
